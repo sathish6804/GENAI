@@ -1,0 +1,63 @@
+Audio to Text:
+Post:https://api.groq.com/openai/v1/audio/translations
+model:whisper-large-v3
+prompt:Transcribe provided audio accurately
+
+Response:
+{
+    "text": " you",
+    "x_groq": {
+        "id": "req_01k7mna4hafrtrvws9xj8g1j1h"
+    }
+}
+
+
+Debit card verfication sceanrio
+
+Request:
+
+{
+  "model": "openai/gpt-oss-120b",
+  "messages": [
+    {
+      "role": "user",
+      "content": "You are a manual tester and generate test data for visa debit card applications for different types of cards and conditions. Here are some positive test cases:\n\npositiveCases:\n[\n  {\n    \"testCaseId\": \"POC-001\",\n    \"cardType\": \"VISA\",\n    \"cardNumber\": \"4111111111111111\",\n    \"cardHolderName\": \"raju\",\n    \"expiryDate\": \"08/32\",\n    \"cvv\": \"146\",\n    \"expectedResult\": \"Transaction Approved\"\n  }\n]"
+    }
+  ],
+  "temperature": 0.1
+}
+
+Response:
+{
+    "id": "chatcmpl-0f141876-eb16-4d64-bbfb-7ee7ec77996f",
+    "object": "chat.completion",
+    "created": 1760557609,
+    "model": "openai/gpt-oss-120b",
+    "choices": [
+        {
+            "index": 0,
+            "message": {
+                "role": "assistant",
+                "content": "Below is a ready‑to‑use data set that you can copy‑paste into a spreadsheet, test‑management tool, or JSON file.  \nIt contains **positive** (expected to be accepted) and **negative** (expected to be rejected) test cases for a Visa‑debit‑card‑application flow.  \n\nThe fields used are:\n\n| Field | Description |\n|-------|-------------|\n| **testCaseId** | Unique identifier – follow the pattern `POC‑###` for positive cases and `NOC‑###` for negative cases. |\n| **cardType** | Visa product being applied for (e.g., `VISA`, `VISA DEBIT`, `VISA ELECTRON`). |\n| **cardNumber** | 16‑digit test PAN that passes the Luhn check (or deliberately fails for negative cases). |\n| **cardHolderName** | Name of the applicant – includes normal, edge‑case, and invalid formats. |\n| **expiryDate** | MM/YY format. Must be a future date for positive cases; past or malformed for negative cases. |\n| **cvv** | 3‑digit security code (or 2‑digit for Electron). |\n| **expectedResult** | What the system should return. |\n\n---  \n\n## Full Test‑Data Set (JSON)\n\n```json\n{\n  \"positiveCases\": [\n    {\n      \"testCaseId\": \"POC-001\",\n      \"cardType\": \"VISA\",\n      \"cardNumber\": \"4111111111111111\",\n      \"cardHolderName\": \"raju\",\n      \"expiryDate\": \"08/32\",\n      \"cvv\": \"146\",\n      \"expectedResult\": \"Transaction Approved\"\n    },\n    {\n      \"testCaseId\": \"POC-002\",\n      \"cardType\": \"VISA DEBIT\",\n      \"cardNumber\": \"4000056655665556\",\n      \"cardHolderName\": \"Anita Sharma\",\n      \"expiryDate\": \"12/30\",\n      \"cvv\": \"321\",\n      \"expectedResult\": \"Transaction Approved\"\n    },\n    {\n      \"testCaseId\": \"POC-003\",\n      \"cardType\": \"VISA ELECTRON\",\n      \"cardNumber\": \"4024007144641234\",\n      \"cardHolderName\": \"John O'Connor\",\n      \"expiryDate\": \"05/29\",\n      \"cvv\": \"12\",               // Electron uses a 2‑digit CVV in many test suites\n      \"expectedResult\": \"Transaction Approved\"\n    },\n    {\n      \"testCaseId\": \"POC-004\",\n      \"cardType\": \"VISA\",\n      \"cardNumber\": \"4111111111111111\",\n      \"cardHolderName\": \"Miyuki Tanaka\",\n      \"expiryDate\": \"01/35\",\n      \"cvv\": \"999\",\n      \"expectedResult\": \"Transaction Approved\"\n    },\n    {\n      \"testCaseId\": \"POC-005\",\n      \"cardType\": \"VISA DEBIT\",\n      \"cardNumber\": \"4000000000000002\",\n      \"cardHolderName\": \"Álvaro Núñez\",\n      \"expiryDate\": \"11/33\",\n      \"cvv\": \"001\",\n      \"expectedResult\": \"Transaction Approved\"\n    },\n    {\n      \"testCaseId\": \"POC-006\",\n      \"cardType\": \"VISA\",\n      \"cardNumber\": \"4111111111111111\",\n      \"cardHolderName\": \"A\".repeat(50),   // 50‑character name (max length test)\n      \"expiryDate\": \"07/34\",\n      \"cvv\": \"555\",\n      \"expectedResult\": \"Transaction Approved\"\n    },\n    {\n      \"testCaseId\": \"POC-007\",\n      \"cardType\": \"VISA DEBIT\",\n      \"cardNumber\": \"4000056655665556\",\n      \"cardHolderName\": \"李四\",\n      \"expiryDate\": \"09/31\",\n      \"cvv\": \"777\",\n      \"expectedResult\": \"Transaction Approved\"\n    },\n    {\n      \"testCaseId\": \"POC-008\",\n      \"cardType\": \"VISA\",\n      \"cardNumber\": \"4111111111111111\",\n      \"cardHolderName\": \"Emma‑Grace O’Neil\",\n      \"expiryDate\": \"03/36\",\n      \"cvv\": \"123\",\n      \"expectedResult\": \"Transaction Approved\"\n    },\n    {\n      \"testCaseId\": \"POC-009\",\n      \"cardType\": \"VISA ELECTRON\",\n      \"cardNumber\": \"4024007144641234\",\n      \"cardHolderName\": \"Carlos M. de la Cruz\",\n      \"expiryDate\": \"06/32\",\n      \"cvv\": \"45\",\n      \"expectedResult\": \"Transaction Approved\"\n    },\n    {\n      \"testCaseId\": \"POC-010\",\n      \"cardType\": \"VISA DEBIT\",\n      \"cardNumber\": \"4000000000000002\",\n      \"cardHolderName\": \"Nina Patel\",\n      \"expiryDate\": \"10/31\",\n      \"cvv\": \"010\",\n      \"expectedResult\": \"Transaction Approved\"\n    }\n  ],\n\n  \"negativeCases\": [\n    {\n      \"testCaseId\": \"NOC-001\",\n      \"cardType\": \"VISA\",\n      \"cardNumber\": \"4111111111111112\",   // fails Luhn check\n      \"cardHolderName\": \"Raju\",\n      \"expiryDate\": \"08/32\",\n      \"cvv\": \"146\",\n      \"expectedResult\": \"Invalid Card Number\"\n    },\n    {\n      \"testCaseId\": \"NOC-002\",\n      \"cardType\": \"VISA DEBIT\",\n      \"cardNumber\": \"4000056655665556\",\n      \"cardHolderName\": \"Anita Sharma\",\n      \"expiryDate\": \"04/20\",               // expired\n      \"cvv\": \"321\",\n      \"expectedResult\": \"Card Expired\"\n    },\n    {\n      \"testCaseId\": \"NOC-003\",\n      \"cardType\": \"VISA ELECTRON\",\n      \"cardNumber\": \"4024007144641234\",\n      \"cardHolderName\": \"John O'Connor\",\n      \"expiryDate\": \"13/29\",               // invalid month\n      \"cvv\": \"12\",\n      \"expectedResult\": \"Invalid Expiry Date Format\"\n    },\n    {\n      \"testCaseId\": \"NOC-004\",\n      \"cardType\": \"VISA\",\n      \"cardNumber\": \"4111111111111111\",\n      \"cardHolderName\": \"Miyuki Tanaka\",\n      \"expiryDate\": \"01/35\",\n      \"cvv\": \"99\",                         // CVV too short\n      \"expectedResult\": \"Invalid CVV Length\"\n    },\n    {\n      \"testCaseId\": \"NOC-005\",\n      \"cardType\": \"VISA DEBIT\",\n      \"cardNumber\": \"4000000000000002\",\n      \"cardHolderName\": \"Álvaro Núñez\",\n      \"expiryDate\": \"11/33\",\n      \"cvv\": \"1234\",                       // CVV too long\n      \"expectedResult\": \"Invalid CVV Length\"\n    },\n    {\n      \"testCaseId\": \"NOC-006\",\n      \"cardType\": \"VISA\",\n      \"cardNumber\": \"4111111111111111\",\n      \"cardHolderName\": \"\",                // empty name\n      \"expiryDate\": \"07/34\",\n      \"cvv\": \"555\",\n      \"expectedResult\": \"Cardholder Name Required\"\n    },\n    {\n      \"testCaseId\": \"NOC-007\",\n      \"cardType\": \"VISA DEBIT\",\n      \"cardNumber\": \"4000056655665556\",\n      \"cardHolderName\": \"Li\".repeat(101), // name exceeds max length (assuming 100)\n      \"expiryDate\": \"09/31\",\n      \"cvv\": \"777\",\n      \"expectedResult\": \"Cardholder Name Too Long\"\n    },\n    {\n      \"testCaseId\": \"NOC-008\",\n      \"cardType\": \"VISA\",\n      \"cardNumber\": \"4111111111111111\",\n      \"cardHolderName\": \"Emma‑Grace O’Neil\",\n      \"expiryDate\": \"03/19\",               // already expired\n      \"cvv\": \"123\",\n      \"expectedResult\": \"Card Expired\"\n    },\n    {\n      \"testCaseId\": \"NOC-009\",\n      \"cardType\": \"VISA ELECTRON\",\n      \"cardNumber\": \"4024007144641234\",\n      \"cardHolderName\": \"Carlos M. de la Cruz\",\n      \"expiryDate\": \"06/32\",\n      \"cvv\": \"123\",                        // Electron expects 2‑digit CVV\n      \"expectedResult\": \"Invalid CVV Length for Visa Electron\"\n    },\n    {\n      \"testCaseId\": \"NOC-010\",\n      \"cardType\": \"VISA DEBIT\",\n      \"cardNumber\": \"1234567890123456\",   // non‑Visa BIN\n      \"cardHolderName\": \"Nina Patel\",\n      \"expiryDate\": \"10/31\",\n      \"cvv\": \"010\",\n      \"expectedResult\": \"Card Type Mismatch – Not a Visa Card\"\n    },\n    {\n      \"testCaseId\": \"NOC-011\",\n      \"cardType\": \"VISA\",\n      \"cardNumber\": \"4111111111111111\",\n      \"cardHolderName\": \"Raju@#\",\n      \"expiryDate\": \"08/32\",\n      \"cvv\": \"146\",\n      \"expectedResult\": \"Invalid Characters in Cardholder Name\"\n    },\n    {\n      \"testCaseId\": \"NOC-012\",\n      \"cardType\": \"VISA DEBIT\",\n      \"cardNumber\": \"4000056655665556\",\n      \"cardHolderName\": \"Anita Sharma\",\n      \"expiryDate\": \"00/25\",               // month 00 not allowed\n      \"cvv\": \"321\",\n      \"expectedResult\": \"Invalid Expiry Month\"\n    },\n    {\n      \"testCaseId\": \"NOC-013\",\n      \"cardType\": \"VISA\",\n      \"cardNumber\": \"4111111111111111\",\n      \"cardHolderName\": \"Miyuki Tanaka\",\n      \"expiryDate\": \"13/25\",               // month >12\n      \"cvv\": \"999\",\n      \"expectedResult\": \"Invalid Expiry Month\"\n    },\n    {\n      \"testCaseId\": \"NOC-014\",\n      \"cardType\": \"VISA DEBIT\",\n      \"cardNumber\": \"4000000000000002\",\n      \"cardHolderName\": \"Álvaro Núñez\",\n      \"expiryDate\": \"11/99\",               // far‑future year (beyond system limit)\n      \"cvv\": \"001\",\n      \"expectedResult\": \"Expiry Year Out Of Range\"\n    }\n  ]\n}\n```\n\n### How to use the data\n\n| Step | Action |\n|------|--------|\n| **1. Import** | Paste the JSON into your test‑case management tool (e.g., TestRail, Zephyr) or convert it to CSV if needed. |\n| **2. Map fields** | Ensure the columns in your tool match the JSON keys (`testCaseId`, `cardType`, …). |\n| **3. Execute** | Run the positive cases against a **valid** sandbox environment and verify you receive “Transaction Approved”. |\n| **4. Execute** | Run the negative cases against the same environment and verify the exact error messages listed in `expectedResult`. |\n| **5. Regression** | Keep this file version‑controlled; add new cases when new validation rules are introduced (e.g., 3‑DS, tokenisation). |\n\nFeel free to extend the list with additional card‑type variations (e.g., **VISA PREPAID**, **VISA BUSINESS**) or locale‑specific name rules as your application evolves. Happy testing!",
+                "reasoning": "The user wants to generate test data for visa debit card applications for different types of cards and conditions. They gave a positive test case example. Likely they want more test cases, both positive and negative? The prompt: \"You are a manual tester and generate test data for visa debit card applications for different types of cards and conditions. Here are some positive test cases: ...\" So they likely want more test cases. We should respond with a set of test cases, both positive and negative, covering various scenarios: different card types (VISA, VISA Debit, VISA Electron, etc.), different expiry dates (valid, near expiry, far future), different CVV lengths, edge cases like max length name, special characters, etc. Also negative cases: invalid card number (fails Luhn), expired date, wrong CVV, mismatched card type, etc.\n\nWe should output JSON with positiveCases and negativeCases arrays. Provide testCaseId, cardType, cardNumber, cardHolderName, expiryDate, cvv, expectedResult. Ensure variety.\n\nWe must not violate policy. It's fine.\n\nWe'll produce a comprehensive set."
+            },
+            "logprobs": null,
+            "finish_reason": "stop"
+        }
+    ],
+    "usage": {
+        "queue_time": 0.069387597,
+        "prompt_tokens": 180,
+        "prompt_time": 0.042295243,
+        "completion_tokens": 2787,
+        "completion_time": 5.9031141510000005,
+        "total_tokens": 2967,
+        "total_time": 5.945409394
+    },
+    "usage_breakdown": null,
+    "system_fingerprint": "fp_3a688838c3",
+    "x_groq": {
+        "id": "req_01k7mpj72tff1825xnxc55amz3"
+    },
+    "service_tier": "on_demand"
+}
