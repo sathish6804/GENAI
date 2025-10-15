@@ -1,0 +1,120 @@
+Image to text :
+
+Post: https://api.groq.com/openai/v1/chat/completions
+
+Request:
+{
+  "model": "meta-llama/llama-4-scout-17b-16e-instruct",
+  "messages": [
+        {
+            "role": "user",
+            "content": [
+                {
+                    "type": "text",
+                    "text": "In the image provided, extract and show only the text displayed"
+                },
+                {
+                    "type": "image_url",
+                    "image_url": {
+                        "url": "https://shifu.hotstarext.com/SOURCE/VOD/cd-2025-08-29/PKLEveryday_Web-025dd6fe-6750-407c-a170-826fd089bed0.jpg"
+                    }
+                }
+            ]
+        }
+    ],
+    "temperature":0.01
+}
+
+Response:
+
+{
+    "id": "chatcmpl-372b3e37-3c23-43ff-93e9-2a5bd43b3761",
+    "object": "chat.completion",
+    "created": 1760558328,
+    "model": "meta-llama/llama-4-scout-17b-16e-instruct",
+    "choices": [
+        {
+            "index": 0,
+            "message": {
+                "role": "assistant",
+                "content": "The text in the image reads:\n\nPro Kabaddi League\nEVERY DAY\n7:30PM ONWARDS"
+            },
+            "logprobs": null,
+            "finish_reason": "stop"
+        }
+    ],
+    "usage": {
+        "queue_time": 0.128656004,
+        "prompt_tokens": 2346,
+        "prompt_time": 0.069516356,
+        "completion_tokens": 25,
+        "completion_time": 0.068640629,
+        "total_tokens": 2371,
+        "total_time": 0.138156985
+    },
+    "usage_breakdown": null,
+    "system_fingerprint": "fp_37da608fc1",
+    "x_groq": {
+        "id": "req_01k7mq8a69e7gvkmcyx6yzgqy9"
+    },
+    "service_tier": "on_demand"
+}
+
+2.Captcha to text:
+
+Request
+{
+  "model": "meta-llama/llama-4-scout-17b-16e-instruct",
+  "messages": [
+        {
+            "role": "user",
+            "content": [
+                {
+                    "type": "text",
+                    "text": "In the image provided, extract and show only the text displayed"
+                },
+                {
+                    "type": "image_url",
+                    "image_url": {
+                        "url": "https://sbi.bank.in/o/SBI-Theme/images/custom/logo.png"
+                    }
+                }
+            ]
+        }
+    ],
+    "temperature":0.01
+}
+
+Response:
+{
+    "id": "chatcmpl-816622b1-93d4-4adf-9581-6b80fe79b3bb",
+    "object": "chat.completion",
+    "created": 1760561025,
+    "model": "meta-llama/llama-4-scout-17b-16e-instruct",
+    "choices": [
+        {
+            "index": 0,
+            "message": {
+                "role": "assistant",
+                "content": "SBI"
+            },
+            "logprobs": null,
+            "finish_reason": "stop"
+        }
+    ],
+    "usage": {
+        "queue_time": 0.057295095,
+        "prompt_tokens": 171,
+        "prompt_time": 0.004177034,
+        "completion_tokens": 3,
+        "completion_time": 0.007684253,
+        "total_tokens": 174,
+        "total_time": 0.011861287
+    },
+    "usage_breakdown": null,
+    "system_fingerprint": "fp_5d3e4e58e1",
+    "x_groq": {
+        "id": "req_01k7mstkgte9hs08nm747y0mhx"
+    },
+    "service_tier": "on_demand"
+}
