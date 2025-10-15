@@ -1,0 +1,120 @@
+Instructions:
+
+Generate only Playwright TypeScript code.
+
+Simulate a simple HTML DOM-based login flow.
+
+Navigates to the IRCTC login page.
+
+Performs secure login using sample credentials.
+
+Verifies access to the welcome/dashboard and ticket booking section.
+
+Avoid backend or advanced UI interactions (e.g. no full-page mocking or API testing).
+
+Designed for manual captcha handling (if present).
+
+
+Context
+
+This script emulates a real user logging into their IRCTC account.
+
+After login, users should be redirected to a welcome or ticket booking page.
+
+This test verifies that the login form accepts user input and leads to the expected page upon successful login.
+
+CAPTCHA handling must be done manually due to IRCTC’s security policies.
+
+Example:
+Online IRCTC login page
+
+import { test, expect } from '@playwright/test';
+
+test('IRCTC login flow - simple DOM based simulation', async ({ page }) => {
+  // Navigate to IRCTC login page
+  await page.goto('https://www.irctc.co.in/nget/train-search');
+
+  // Click login button to open login form (adjust selector if needed)
+  await page.locator('a[aria-label="Click here to login in application"]').click();
+
+  // Fill username field
+  await page.locator('input[formcontrolname="userId"]').fill('sampleUser');
+
+  // Fill password field
+  await page.locator('input[formcontrolname="password"]').fill('samplePassword123');
+
+  // Pause for manual captcha handling if present
+  console.log('Pause to complete CAPTCHA manually if prompted.');
+
+  // Click the login button
+  await page.locator('button[color="accent"]').click();
+
+  // Wait for welcome/dashboard text to confirm login success
+  await expect(page.locator('text=Welcome')).toBeVisible({ timeout: 20000 });
+
+  // Verify ticket booking section is accessible
+  await expect(page.locator('text=Book Ticket')).toBeVisible();
+});
+
+
+convert playwright typescript code to java selenium code
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
+
+public class IrctcLoginTest {
+    public static void main(String[] args) {
+        // Set the path to chromedriver executable if needed
+        // System.setProperty("webdriver.chrome.driver", "/path/to/chromedriver");
+
+        WebDriver driver = new ChromeDriver();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+
+        try {
+            // Navigate to IRCTC login page
+            driver.get("https://www.irctc.co.in/nget/train-search");
+
+            // Click login button to open login form
+            WebElement loginBtn = wait.until(ExpectedConditions.elementToBeClickable(
+                By.cssSelector("a[aria-label='Click here to login in application']")));
+            loginBtn.click();
+
+            // Fill username field
+            WebElement usernameInput = wait.until(ExpectedConditions.visibilityOfElementLocated(
+                By.cssSelector("input[formcontrolname='userId']")));
+            usernameInput.sendKeys("sampleUser");
+
+            // Fill password field
+            WebElement passwordInput = driver.findElement(By.cssSelector("input[formcontrolname='password']"));
+            passwordInput.sendKeys("samplePassword123");
+
+            // Pause to complete CAPTCHA manually if present
+            System.out.println("Please complete CAPTCHA manually if prompted. Press Enter to continue...");
+            System.in.read();  // waits for user input in console
+
+            // Click the login button
+            WebElement loginSubmit = driver.findElement(By.cssSelector("button[color='accent']"));
+            loginSubmit.click();
+
+            // Wait for welcome/dashboard text to confirm login success
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[contains(text(),'Welcome')]")));
+
+            // Verify ticket booking section is accessible
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[contains(text(),'Book Ticket')]")));
+
+            System.out.println("Login successful and ticket booking section is visible.");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            driver.quit();
+        }
+    }
+}
+
